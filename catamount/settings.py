@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'django.contrib.humanize',
 	'listings.apps.ListingsConfig',
 	'pages.apps.PagesConfig',
 	'accounts.apps.AccountsConfig',
@@ -120,4 +121,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = (BASE_DIR / 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+	BASE_DIR / 'catamount/static'
+]
+
+# Media Folder Settings
+MEDIA_ROOT = (BASE_DIR / 'media')
+MEDIA_URL = '/media/'
+
+# Messages
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+	messages.ERROR: 'danger'
+}
+
+try:
+	from .local_settings import *
+except ImportError:
+	pass

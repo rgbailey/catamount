@@ -26,10 +26,18 @@
                     {% endif %}>
                     <a class="nav-link" href="{% url 'about' %}">Sell</a>
                 </li>
-			<li {% if 'about' in request.path %} class="nav-item active mr-3" {% else %} class="nav-item mr-3"
-                    {% endif %}>
-                    <a class="nav-link" href="{% url 'about' %}">Resources</a>
-                </li>
+			<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Resources
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'places' %}">Counties We Serve</a>
+          <a class="dropdown-item" href="{% url 'about' %}">Blog</a>
+          <a class="dropdown-item" href="{% url 'about' %}">Real Estate Glossary</a>
+			<a class="dropdown-item" href="{% url 'about' %}">Testimonials</a>
+        </div>
+      </li>
+			
 			<li {% if 'about' in request.path %} class="nav-item active mr-3" {% else %} class="nav-item mr-3"
                     {% endif %}>
                     <a class="nav-link" href="{% url 'about' %}">Contact</a>

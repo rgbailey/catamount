@@ -1,6 +1,9 @@
 p, h1, h2 {
 	font-family: 'Lato', sans-serif;
 }
+#main-color {
+	background-color: #1b5637;
+}
 
 .btn-secondary {
     color: #fff !important;
@@ -11,7 +14,7 @@ img {
 }
 
 .logo {
-    width: 80px;
+    width: 245px;
 }
 
 .navbar {

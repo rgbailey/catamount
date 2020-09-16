@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from listings.models import Listing
+from realtors.models import Realtor
 from .models import City
 
 
@@ -13,7 +14,22 @@ def index(request):
 
 
 def about(request):
-	return render(request, 'pages/about.html')
+    # Get all realtors
+    realtors = Realtor.objects.order_by('-hire_date')
+
+    # Get MVP
+    mvp_realtors = Realtor.objects.all().filter(is_mvp=True)
+
+    context = {
+        'realtors': realtors,
+        'mvp_realtors': mvp_realtors
+    }
+
+    return render(request, 'pages/about.html', context)
+
+
+def sell(request):
+	return render(request, 'pages/sell.html')
 
 
 def places(request):
@@ -24,14 +40,14 @@ def places(request):
 	paged_cities = paginator.get_page(page)
 
 	context = {
-		'cities': paged_cities
+		'city': paged_cities
 	}
 
 	return render(request, 'pages/places.html', context)
 
 
-def place(request, city_name):
-	city = get_object_or_404(City, pk=city_name)
+def place(request, city_slug):
+	city = get_object_or_404(City, city_slug=city_slug)
 
 	context = {
 		'city': city

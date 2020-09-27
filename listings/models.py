@@ -1,7 +1,7 @@
 from django.db import models
 
 from django.db import models
-from datetime import datetime
+from datetime import date
 from realtors.models import Realtor
 
 
@@ -27,7 +27,7 @@ class Listing(models.Model):
 	photo_5 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
 	photo_6 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
 	is_published = models.BooleanField(default=True)
-	list_date = models.DateTimeField(default=datetime.now, blank=True)
+	list_date = models.DateField(default=date.today)
 
 	def __str__(self):
 		return self.title

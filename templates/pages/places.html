@@ -35,18 +35,21 @@
 <section id="citys" class="py-4">
 	<div class="container">
 		<div class="row">
-			{% if citys %}
-			{% for city in citys %}
-			<div class="col-md-6 col-lg-4 mb-4">
+			{% if cities %}
+			{% for city in cities %}
+				<div class="col-md-6 col-lg-4 mb-4">
+					<a href="{% url 'place' city.city_name  %}">
 				<div class="card city-preview">
 					<img class="card-img-top" src="{{ city.photo_main.url }}" alt="">
 					<div class="card-img-overlay">
 						<h2>
-							<span class="badge badge-secondary text-white">${{ city.city_name }}</span>
+							<span class="badge badge-primary text-white">{{ city.city_name }}</span>
 						</h2>
 					</div>
 				</div>
+					</a>
 			</div>
+				
 			{% endfor %}
 			{% else %}
 			<div class="col-md-12">

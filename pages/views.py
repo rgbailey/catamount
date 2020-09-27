@@ -40,7 +40,7 @@ def places(request):
 	paged_cities = paginator.get_page(page)
 
 	context = {
-		'city': paged_cities
+		'cities': paged_cities
 	}
 
 	return render(request, 'pages/places.html', context)

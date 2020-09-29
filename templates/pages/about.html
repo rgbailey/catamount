@@ -9,46 +9,24 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4">About Catamount Realty</h1>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p>
+          <h1 class="display-4">About Catamount Realty Group</h1>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Breadcrumb -->
-  <section id="bc" class="mt-3">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="{% url 'index' %}">
-              <i class="fas fa-home"></i> Home</a>
-          </li>
-          <li class="breadcrumb-item active"> About</li>
-        </ol>
-      </nav>
-    </div>
-  </section>
-
   <section id="about" class="py-4">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>We Search For The Perfect Home</h2>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p>
-          <img src="{% static 'img/about.jpg' %}" alt="">
-          <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis esse officia repudiandae ad saepe ex, amet
-            neque quod accusamus rem quia magnam magni dolorum facilis ullam minima perferendis? Exercitationem at quaerat
-            commodi id libero eveniet harum perferendis laborum molestias quia.</p>
-			 <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis esse officia repudiandae ad saepe ex, amet
-            neque quod accusamus rem quia magnam magni dolorum facilis ullam minima perferendis? Exercitationem at quaerat
-            commodi id libero eveniet harum perferendis laborum molestias quia.</p>
-			 <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis esse officia repudiandae ad saepe ex, amet
-            neque quod accusamus rem quia magnam magni dolorum facilis ullam minima perferendis? Exercitationem at quaerat
-            commodi id libero eveniet harum perferendis laborum molestias quia.</p>
+          <img src="{% static 'img/Catamount2020Group-scaled.jpg' %}" alt="Catamount Realty Team">
+          <p class="mt-4">We specialize in Vermont residential real estate including the listing and sale of single-family homes, townhomes, condos and one to four unit multi-family homes in the following towns and cities: Burlington, South Burlington, Colchester, Essex, Essex Junction, Winooski, Williston and Shelburne, Vermont. We also cover many surrounding towns including Hinesburg, Huntington, Jericho, Milton, Rutland, Saint Albans, Saint George, Stowe and more.</p>
+			          <p class="mt-4">We enjoy working with a wide range of clientele from first time home buyers to corporate transferees to retirees. We particularly enjoy working with first time home buyers as we find it very rewarding to help someone find their first home. However, whether you are looking for your first home, a move-up home or a retirement home, we are here to help you and will do everything that we can to make your home buying or selling experience a pleasurable one. Real estate is our passion and we go the extra mile to make sure that every detail is taken care of with the utmost of attention.</p>
+			<p class="mt-4">We have an excellent team of professionals who can assist you in all aspects of your home purchase or sale including mortgage bankers, attorneys, home inspectors and handyman referrals. The wonderful team of professionals whom we are fortunate enough to work with strive to make all aspects of your home purchase as pleasant and stress-free as possible. Our team is very diligent and we always respond promptly and with enthusiasm. We are honest, hardworking and full of integrity and care deeply that our customers receive 100% satisfaction. When working with us, you will find an unsurpassed level of commitment and quality service.</p>
+			<p class="mt-4">If you are looking for a Realtor and a team you can trust, who care about providing exceptional quality service and always have your best interests at heart, please contact us today. We look forward to hearing from you.</p>
+			<p class="mt-4"></p>
+
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           {% if mvp_realtors %}
             {% for realtor in mvp_realtors %}
             <div class="card">
@@ -82,11 +60,10 @@
       <div class="row text-center">
         {% if realtors %}
           {% for realtor in realtors %}
-          <div class="col-md-4">
-              <img src="{{ realtor.photo.url }}" alt="" class="rounded-circle mb-3">
+          <div class="col-md-3 mx-auto">
+              <img style="max-width: 70%;" src="{{ realtor.photo.url }}" alt="{{ realtor.name }}" class=" mb-3">
               <h4>{{ realtor.name }}</h4>
-              <p class="text-success">
-                <i class="fas fa-award text-success mb-3"></i> Realtor</p>
+              <p>Realtor</p>
               <hr>
               <p>
                 <i class="fas fa-phone"></i> {{ realtor.phone }}</p>

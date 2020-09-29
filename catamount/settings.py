@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '$_^@0z@2xte8b&-@^+15fo=4^f!63dlo4t%v@h5_m^!(ektged'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -55,7 +55,6 @@ MIDDLEWARE = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'catamount.urls'
@@ -130,7 +129,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
 	BASE_DIR / 'catamount/static'
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media Folder Settings
 MEDIA_ROOT = (BASE_DIR / 'media')
@@ -142,10 +140,3 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
 	messages.ERROR: 'danger'
 }
-
-try:
-	from .local_settings import *
-except ImportError:
-	pass
-
-django_heroku.settings(locals())

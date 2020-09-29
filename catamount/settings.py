@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 
 import dj_database_url
-import django_heroku
 
 from decouple import config
 from pathlib import Path
@@ -153,3 +152,7 @@ try:
 	from .local_settings import *
 except ImportError:
 	pass
+
+
+import django_heroku
+django_heroku.settings(locals())

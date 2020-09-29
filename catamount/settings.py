@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import dj_database_url
 import django_heroku
 
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,7 @@ SECRET_KEY = '$_^@0z@2xte8b&-@^+15fo=4^f!63dlo4t%v@h5_m^!(ektged'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -81,14 +82,27 @@ WSGI_APPLICATION = 'catamount.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'catamountdb',
-		'USER': 'root',
-		'PASSWORD': 'romario123',
+
+if DEBUG:
+	
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.mysql',
+			'NAME': 'catamountdb',
+			'USER': 'root',
+			'PASSWORD': 'romario123',
+		}
 	}
-}
+else:
+	SECRET_KEY = config('SECRET_KEY')
+	DEBUG = config('DEBUG', default=False, cast=bool)
+	DATABASES = {
+		'default': dj_database_url.config(
+			default=config('DATABASE_URL')
+		)
+	}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -130,13 +144,20 @@ STATICFILES_DIRS = [
 	BASE_DIR / 'catamount/static'
 ]
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 # Media Folder Settings
 MEDIA_ROOT = (BASE_DIR / 'media')
 MEDIA_URL = '/media/'
 
+
 # Messages
 from django.contrib.messages import constants as messages
-
 MESSAGE_TAGS = {
-	messages.ERROR: 'danger'
+    messages.ERROR: 'danger'
 }
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass

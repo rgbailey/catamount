@@ -59,6 +59,7 @@ MIDDLEWARE = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'catamount.urls'
@@ -86,7 +87,6 @@ WSGI_APPLICATION = 'catamount.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
-
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 DATABASES = {
@@ -94,8 +94,6 @@ DATABASES = {
 		default=config('DATABASE_URL')
 	)
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -144,14 +142,14 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
 
-
 # Messages
 from django.contrib.messages import constants as messages
+
 MESSAGE_TAGS = {
-    messages.ERROR: 'danger'
+	messages.ERROR: 'danger'
 }
 
 try:
-    from .local_settings import *
+	from .local_settings import *
 except ImportError:
-    pass
+	pass

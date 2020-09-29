@@ -83,24 +83,14 @@ WSGI_APPLICATION = 'catamount.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
-if DEBUG:
-	
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.mysql',
-			'NAME': 'catamountdb',
-			'USER': 'root',
-			'PASSWORD': 'romario123',
-		}
-	}
-else:
-	SECRET_KEY = config('SECRET_KEY')
-	DEBUG = config('DEBUG', default=False, cast=bool)
-	DATABASES = {
-		'default': dj_database_url.config(
-			default=config('DATABASE_URL')
-		)
-	}
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+DATABASES = {
+	'default': dj_database_url.config(
+		default=config('DATABASE_URL')
+	)
+}
 
 
 

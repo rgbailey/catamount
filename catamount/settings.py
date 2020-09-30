@@ -11,9 +11,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 
-import dj_database_url
-
-from decouple import config
 from pathlib import Path
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -28,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '$_^@0z@2xte8b&-@^+15fo=4^f!63dlo4t%v@h5_m^!(ektged'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -47,18 +44,18 @@ INSTALLED_APPS = [
 	'accounts.apps.AccountsConfig',
 	'contacts.apps.ContactsConfig',
 	'realtors.apps.RealtorsConfig',
-	'rest_framework',
 ]
 
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
 ROOT_URLCONF = 'catamount.urls'
@@ -84,14 +81,13 @@ WSGI_APPLICATION = 'catamount.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
 DATABASES = {
-	'default': dj_database_url.config(
-		default=config('DATABASE_URL')
-	)
+	'default': {
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'catamountdb',
+		'USER': 'root',
+		'PASSWORD': 'romario123',
+	}
 }
 
 # Password validation
@@ -128,14 +124,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
-STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
 	BASE_DIR / 'catamount/static'
 ]
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media Folder Settings
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
@@ -153,6 +154,8 @@ try:
 except ImportError:
 	pass
 
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
 
-import django_heroku
-django_heroku.settings(locals())
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)

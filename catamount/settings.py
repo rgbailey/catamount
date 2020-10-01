@@ -13,7 +13,6 @@ import os
 
 from pathlib import Path
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +26,7 @@ SECRET_KEY = '$_^@0z@2xte8b&-@^+15fo=4^f!63dlo4t%v@h5_m^!(ektged'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -63,7 +62,8 @@ ROOT_URLCONF = 'catamount.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [BASE_DIR / 'templates']
+		'DIRS': [os.path.join(BASE_DIR, 'templates')]
+		
 		,
 		'APP_DIRS': True,
 		'OPTIONS': {
@@ -131,7 +131,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-	BASE_DIR / 'catamount/static'
+	os.path.join(BASE_DIR, 'catamount/static')
 ]
 
 # Simplified static file serving.
@@ -139,7 +139,7 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media Folder Settings
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Messages
@@ -148,14 +148,3 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
 	messages.ERROR: 'danger'
 }
-
-try:
-	from .local_settings import *
-except ImportError:
-	pass
-
-# Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)

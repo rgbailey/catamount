@@ -26,7 +26,7 @@ SECRET_KEY="c8eb0450d2415b54afad806972e20a7830f960a771849086"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['catamountrealty.herokuapp.com']
+ALLOWED_HOSTS = ['catamountrealty.herokuapp.com', 'catamountrealtygroup.herokuapp.com']
 
 # Application definition
 

@@ -47,7 +47,7 @@ def places(request):
 
 
 def place(request, city_slug):
-	city = get_object_or_404(City, city_slug=city_slug)
+	city = get_object_or_404(City, city_slug=city_slug.lower())
 
 	context = {
 		'city': city

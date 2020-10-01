@@ -81,13 +81,23 @@ WSGI_APPLICATION = 'catamount.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DATABASES = {
+'''DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': 'catamountdb',
 		'USER': 'root',
 		'PASSWORD': 'romario123',
 	}
+}'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dcjtpbeb7j7ar7',
+        'USER': 'mihqznwgrairok',
+        'PASSWORD': '8d791c5059672d639e2910ce8c48fcfc8a979304ffafad2a43140fe01c7746a0',
+        'HOST': 'ec2-3-210-178-167.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
 }
 
 # Password validation

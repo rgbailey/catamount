@@ -26,7 +26,7 @@ SECRET_KEY = '$_^@0z@2xte8b&-@^+15fo=4^f!63dlo4t%v@h5_m^!(ektged'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['catamountrealty.heroku.com']
 
 # Application definition
 
